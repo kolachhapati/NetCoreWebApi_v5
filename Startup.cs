@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using NetCoreWebApi_v5.Configurations;
 using NetCoreWebApi_v5.Data;
 using System;
 using System.Collections.Generic;
@@ -30,7 +31,17 @@ namespace NetCoreWebApi_v5
         {
             services.AddDbContext<DatabaseContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("sqlConnection"))
-               );
+                 );
+
+            services.AddCors(opt =>
+            {
+                opt.AddPolicy("CorsPolicy", builder =>
+                 builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
+            });
+
+            services.AddAutoMapper(typeof(MapperInitializer));
 
             services.AddSwaggerGen(c =>
             {
@@ -53,6 +64,8 @@ namespace NetCoreWebApi_v5
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("CorsPolicy");
 
             app.UseAuthorization();
 
