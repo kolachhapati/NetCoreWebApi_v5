@@ -29,8 +29,9 @@ namespace NetCoreWebApi_v5
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DatabaseContext>(options =>
-               options.UseSqlServer(Configuration.GetConnectionString("sqlConnection")));
-          
+                    options.UseSqlServer(Configuration.GetConnectionString("sqlConnection"))
+               );
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "NetCoreWebApi_v5", Version = "v1" });
