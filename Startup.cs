@@ -10,6 +10,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using NetCoreWebApi_v5.Configurations;
 using NetCoreWebApi_v5.Data;
+using NetCoreWebApi_v5.IRepository;
+using NetCoreWebApi_v5.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,12 +45,16 @@ namespace NetCoreWebApi_v5
 
             services.AddAutoMapper(typeof(MapperInitializer));
 
+            services.AddTransient<IUnitofWork, UnitofWork>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "NetCoreWebApi_v5", Version = "v1" });
             });
 
-            services.AddControllers();
+            services.AddControllers()
+                    .AddNewtonsoftJson(opt =>
+                     opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
