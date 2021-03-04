@@ -6,16 +6,19 @@ using System.Threading.Tasks;
 
 namespace NetCoreWebApi_v5.Models
 {
-    public class CountryDTO 
+    public class CreateCountryDTO
     {
-        public int Id { get; set; }
-
         [Required]
-        [StringLength(maximumLength:50)]
+        [StringLength(maximumLength: 50)]
         public string Name { get; set; }
 
         [Required]
         [StringLength(maximumLength: 3)]
         public string ShortName { get; set; }
+    }
+    public class CountryDTO  : CreateCountryDTO
+    {
+        public int Id { get; set; }
+        public IList<HotelDTO> Hotels { get; set; }
     }
 }
