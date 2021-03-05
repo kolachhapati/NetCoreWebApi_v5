@@ -41,5 +41,22 @@ namespace NetCoreWebApi_v5.Controllers
                 return StatusCode(500, "Internal Server Error");
             }
         }
+
+
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> GetCountry(int id)
+        {
+            try
+            {
+                var countries = await _unitofWork.Countries.Get(x => x.Id == id, new List<string> { "Hotels" });
+                var result = _mapper.Map<IList<CountryDTO>>(countries);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Something went wrong in the  {nameof(GetCountries)}");
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
     }
 }

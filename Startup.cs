@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using NetCoreWebApi_v5.Configurations;
 using NetCoreWebApi_v5.Data;
+using NetCoreWebApi_v5.Extensions;
 using NetCoreWebApi_v5.IRepository;
 using NetCoreWebApi_v5.Repository;
 using System;
@@ -34,6 +35,9 @@ namespace NetCoreWebApi_v5
             services.AddDbContext<DatabaseContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("sqlConnection"))
                  );
+            services.AddAuthentication();
+
+            services.ConfigureIdentity();
 
             services.AddCors(opt =>
             {

@@ -17,13 +17,13 @@ namespace NetCoreWebApi_v5.Configurations
             CreateMap<Country, CreateCountryDTO>().ReverseMap();
             CreateMap<Hotel, HotelDTO>().ReverseMap();
             CreateMap<Hotel, CreateHotelDTO>().ReverseMap();
-            //CreateMap<Country, CountryDTO>().ReverseMap();
+            CreateMap<ApiUser, UserDTO>().ReverseMap();
             //CreateMap<Country, CountryDTO>().ReverseMap();
             //CreateMap<Country, CountryDTO>().ReverseMap();
             //CreateMap<Country, CountryDTO>().ReverseMap();
             //CreateMap<Country, CountryDTO>().ReverseMap();
             //CreateMap<Country, CountryDTO>().ReverseMap();
         }
-        
+
     }
 }
