@@ -50,7 +50,7 @@ namespace NetCoreWebApi_v5.Controllers
                 }
                 return Ok($"New User created: {userDTO.EmailAddress}");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 _logger.LogError(ex, $"Something went wrong in the  {nameof(Register)}");
                 return StatusCode(500, "Internal Server Error");
@@ -79,7 +79,7 @@ namespace NetCoreWebApi_v5.Controllers
 
                 return Ok($"Login Success : {userDTO.EmailAddress}");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 _logger.LogError(ex, $"Something went wrong in the  {nameof(Register)}");
                 return StatusCode(500, "Internal Server Error");

@@ -13,6 +13,7 @@ using NetCoreWebApi_v5.Data;
 using NetCoreWebApi_v5.Extensions;
 using NetCoreWebApi_v5.IRepository;
 using NetCoreWebApi_v5.Repository;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,9 @@ namespace NetCoreWebApi_v5
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            Log.Logger = new LoggerConfiguration()
+                               .WriteTo.File("logs\\appErrlog-.txt")
+                               .CreateLogger();
         }
 
         public IConfiguration Configuration { get; }
@@ -35,6 +39,7 @@ namespace NetCoreWebApi_v5
             services.AddDbContext<DatabaseContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("sqlConnection"))
                  );
+
             services.AddAuthentication();
 
             services.ConfigureIdentity();
@@ -62,7 +67,7 @@ namespace NetCoreWebApi_v5
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -70,6 +75,8 @@ namespace NetCoreWebApi_v5
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "NetCoreWebApi_v5 v1"));
             }
+
+            loggerFactory.AddSerilog();
 
             app.UseHttpsRedirection();
 
