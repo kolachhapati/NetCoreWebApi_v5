@@ -19,19 +19,17 @@ namespace NetCoreWebApi_v5.Controllers
         private readonly ILogger<AccountController> _logger;
         private readonly IMapper _mapper;
         private readonly UserManager<ApiUser> _userManager;
-        private readonly SignInManager<ApiUser> _signInManager;
 
         public AccountController(IMapper mapper, ILogger<AccountController> logger,
-                                    UserManager<ApiUser> userManager,
-                                    SignInManager<ApiUser> signInManager)
+                                    UserManager<ApiUser> userManager)
         {
             _userManager = userManager;
-            _signInManager = signInManager;
             _logger = logger;
             _mapper = mapper;
         }
 
         [HttpPost]
+        [Route("register")]
         public async Task<ActionResult> Register([FromBody] UserDTO userDTO)
         {
             _logger.LogInformation($"Attempt to register {userDTO.EmailAddress} ");
@@ -44,6 +42,7 @@ namespace NetCoreWebApi_v5.Controllers
             try
             {
                 var user = _mapper.Map<ApiUser>(userDTO);
+                user.UserName = userDTO.EmailAddress;
                 var result = await _userManager.CreateAsync(user);
                 if (!result.Succeeded)
                 {
@@ -59,6 +58,7 @@ namespace NetCoreWebApi_v5.Controllers
         }
 
         [HttpPost]
+        [Route("login")]
         public async Task<ActionResult> Login([FromBody] LoginUserDTO userDTO)
         {
             _logger.LogInformation($"Attempt to login {userDTO.EmailAddress} ");
@@ -70,8 +70,9 @@ namespace NetCoreWebApi_v5.Controllers
 
             try
             {
-                var result = await _signInManager.PasswordSignInAsync(userDTO.EmailAddress, userDTO.Password, false, false);
-                if (!result.Succeeded)
+                var user = await _userManager.FindByEmailAsync(userDTO.EmailAddress);
+                var result = await _userManager.CheckPasswordAsync(user, userDTO.Password);
+                if (!result)
                 {
                     return Unauthorized(userDTO);
                 }
