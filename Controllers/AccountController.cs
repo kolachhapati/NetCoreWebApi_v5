@@ -36,7 +36,7 @@ namespace NetCoreWebApi_v5.Controllers
         [Route("register")]
         public async Task<ActionResult> Register([FromBody] UserDTO userDTO)
         {
-            _logger.LogInformation($"Attempt to register {userDTO.EmailAddress} ");
+            _logger.LogInformation($"Attempt to register {userDTO.Email} ");
            
             if (!ModelState.IsValid)
             {
@@ -46,14 +46,14 @@ namespace NetCoreWebApi_v5.Controllers
             try
             {
                 var user = _mapper.Map<ApiUser>(userDTO);
-                user.UserName = userDTO.EmailAddress;
+                user.UserName = userDTO.Email;
                 var result = await _userManager.CreateAsync(user, userDTO.Password);
                 if (!result.Succeeded)
                 {
                     return BadRequest($"User Registration Has Failed");
                 }
 
-                return Ok($"New User created: {userDTO.EmailAddress}");
+                return Ok($"New User created: {userDTO.Email}");
             }
             catch (Exception ex)
             {
@@ -66,7 +66,7 @@ namespace NetCoreWebApi_v5.Controllers
         [Route("login")]
         public async Task<ActionResult> Login([FromBody] LoginUserDTO userDTO)
         {
-            _logger.LogInformation($"Attempt to login {userDTO.EmailAddress} ");
+            _logger.LogInformation($"Attempt to login {userDTO.Email} ");
 
             if (!ModelState.IsValid)
             {

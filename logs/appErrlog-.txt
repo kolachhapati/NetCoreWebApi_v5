@@ -26,3 +26,22 @@ System.NotImplementedException: The method or operation is not implemented.
 2021-03-05 13:43:02.735 +05:45 [ERR] Something went wrong in the  Register
 System.NotImplementedException: The method or operation is not implemented.
    at NetCoreWebApi_v5.Controllers.AccountController.Login(LoginUserDTO userDTO) in D:\NetCoreWebApi_v5\Controllers\AccountController.cs:line 75
+2021-03-09 16:42:51.840 +05:45 [INF] Application started. Press Ctrl+C to shut down.
+2021-03-09 16:42:51.881 +05:45 [INF] Hosting environment: Development
+2021-03-09 16:42:51.885 +05:45 [INF] Content root path: D:\NetCoreWebApi_v5
+2021-03-09 16:45:54.231 +05:45 [INF] Attempt to register abc@abc.com 
+2021-03-09 16:46:10.975 +05:45 [WRN] User password validation failed: PasswordRequiresNonAlphanumeric;PasswordRequiresLower;PasswordRequiresUpper.
+2021-03-09 16:47:28.238 +05:45 [INF] Attempt to register abc@abc.com 
+2021-03-09 16:47:28.241 +05:45 [WRN] User password validation failed: PasswordRequiresNonAlphanumeric.
+2021-03-09 16:47:43.407 +05:45 [INF] Attempt to register abc@abc.com 
+2021-03-09 16:47:47.157 +05:45 [WRN] User password validation failed: PasswordRequiresNonAlphanumeric.
+2021-03-09 16:48:59.000 +05:45 [INF] Attempt to register abc@abc.com 
+2021-03-09 16:49:03.085 +05:45 [WRN] User validation failed: InvalidEmail.
+2021-03-09 16:49:25.129 +05:45 [INF] Attempt to register sakar@abc.com 
+2021-03-09 16:49:26.692 +05:45 [WRN] User validation failed: InvalidEmail.
+2021-03-09 16:49:55.260 +05:45 [INF] Attempt to register sakar@sakar.com 
+2021-03-09 16:51:36.800 +05:45 [INF] Application started. Press Ctrl+C to shut down.
+2021-03-09 16:51:36.811 +05:45 [INF] Hosting environment: Development
+2021-03-09 16:51:36.824 +05:45 [INF] Content root path: D:\NetCoreWebApi_v5
+2021-03-09 16:53:08.584 +05:45 [INF] Attempt to register sakar@sakar.com 
+2021-03-09 16:54:32.328 +05:45 [INF] Attempt to login sakar@sakar.com 

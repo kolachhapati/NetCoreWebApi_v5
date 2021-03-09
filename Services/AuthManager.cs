@@ -75,7 +75,7 @@ namespace NetCoreWebApi_v5.Services
 
         public async Task<bool> ValidateUser(LoginUserDTO userDto)
         {
-            _user = await _userManager.FindByNameAsync(userDto.EmailAddress);
+            _user = await _userManager.FindByNameAsync(userDto.Email);
             return (_user != null && await _userManager.CheckPasswordAsync(_user, userDto.Password));
         }
     }

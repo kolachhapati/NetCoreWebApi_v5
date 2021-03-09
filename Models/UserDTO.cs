@@ -11,7 +11,7 @@ namespace NetCoreWebApi_v5.Models
     {
         [Required]
         [DataType(DataType.EmailAddress)]
-        public string EmailAddress { get; set; }
+        public string Email { get; set; }
 
         [Required]
         public string Password { get; set; }
