@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -7,14 +6,13 @@ using NetCoreWebApi_v5.Data;
 using NetCoreWebApi_v5.Models;
 using NetCoreWebApi_v5.Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace NetCoreWebApi_v5.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+  
     public class AccountController : ControllerBase
     {
         private readonly ILogger<AccountController> _logger;
