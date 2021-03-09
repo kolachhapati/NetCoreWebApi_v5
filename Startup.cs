@@ -14,6 +14,7 @@ using NetCoreWebApi_v5.Extensions;
 using NetCoreWebApi_v5.IRepository;
 using NetCoreWebApi_v5.Repository;
 using Serilog;
+using Serilog.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,7 @@ namespace NetCoreWebApi_v5
         {
             Configuration = configuration;
             Log.Logger = new LoggerConfiguration()
-                               .WriteTo.File("logs\\appErrlog-.txt")
+                               .WriteTo.File(path:"logs\\errorlog-.txt", restrictedToMinimumLevel: LogEventLevel.Error)
                                .CreateLogger();
         }
 

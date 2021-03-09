@@ -13,7 +13,6 @@ namespace NetCoreWebApi_v5.Extensions
 {
     public static class ServiceExtensions
     {
-
         #region Identity
         public static void ConfigureIdentity(this IServiceCollection services)
         {

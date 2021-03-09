@@ -22,6 +22,7 @@ namespace NetCoreWebApi_v5
                     rollingInterval: RollingInterval.Day,
                     restrictedToMinimumLevel: LogEventLevel.Information
                 ).CreateLogger();
+
             try
             {
                 Log.Information("Application Is Starting");
