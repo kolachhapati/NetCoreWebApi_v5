@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using NetCoreWebApi_v5.Data;
 using NetCoreWebApi_v5.Models;
+using NetCoreWebApi_v5.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,13 +20,16 @@ namespace NetCoreWebApi_v5.Controllers
         private readonly ILogger<AccountController> _logger;
         private readonly IMapper _mapper;
         private readonly UserManager<ApiUser> _userManager;
+        private readonly IAuthManager _authManager;
 
         public AccountController(IMapper mapper, ILogger<AccountController> logger,
-                                    UserManager<ApiUser> userManager)
+                                  UserManager<ApiUser> userManager,
+                                  IAuthManager authmanager)
         {
             _userManager = userManager;
             _logger = logger;
             _mapper = mapper;
+            _authManager = authmanager;
         }
 
         [HttpPost]
@@ -46,7 +50,7 @@ namespace NetCoreWebApi_v5.Controllers
                 var result = await _userManager.CreateAsync(user, userDTO.Password);
                 if (!result.Succeeded)
                 {
-                    return BadRequest($"User Registraion Has Failed");
+                    return BadRequest($"User Registration Has Failed");
                 }
 
                 return Ok($"New User created: {userDTO.EmailAddress}");
@@ -71,18 +75,16 @@ namespace NetCoreWebApi_v5.Controllers
 
             try
             {
-                var user = await _userManager.FindByEmailAsync(userDTO.EmailAddress);
-                var result = await _userManager.CheckPasswordAsync(user, userDTO.Password);
-                if (!result)
+                if (!await _authManager.ValidateUser(userDTO))
                 {
-                    return Unauthorized(userDTO);
+                    return Unauthorized();
                 }
 
-                return Ok($"Login Success : {userDTO.EmailAddress}");
+                return Ok(new { token = await _authManager.CreateToken() });
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Something went wrong in the  { nameof(Register)}");
+                _logger.LogError(ex, $"Something went wrong in the  { nameof(Login)}");
                 return StatusCode(500, "Internal Server Error");
             }
         }

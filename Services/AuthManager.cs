@@ -40,11 +40,11 @@ namespace NetCoreWebApi_v5.Services
             var tokenExpiry = DateTime.Now.AddHours(4);
             
             var token = new JwtSecurityToken(
-                  issuer: jwtSettings.GetSection("Issuer").Value,
-                  claims: claims,
-                  expires: tokenExpiry,
-                  signingCredentials: signingCredentials
-                  );
+                              issuer: jwtSettings.GetSection("Issuer").Value,
+                              claims: claims,
+                              expires: tokenExpiry,
+                              signingCredentials: signingCredentials
+                            );
             return token;
         }
 
@@ -73,7 +73,7 @@ namespace NetCoreWebApi_v5.Services
             return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
         }
 
-        public async Task<bool> ValidateUser(UserDTO userDto)
+        public async Task<bool> ValidateUser(LoginUserDTO userDto)
         {
             _user = await _userManager.FindByNameAsync(userDto.EmailAddress);
             return (_user != null && await _userManager.CheckPasswordAsync(_user, userDto.Password));

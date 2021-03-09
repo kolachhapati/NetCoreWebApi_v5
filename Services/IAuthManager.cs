@@ -8,7 +8,7 @@ namespace NetCoreWebApi_v5.Services
 {
     public interface IAuthManager
     {
-        Task<bool> ValidateUser(UserDTO user);
+        Task<bool> ValidateUser(LoginUserDTO user);
         Task<string> CreateToken();
     }
 }
