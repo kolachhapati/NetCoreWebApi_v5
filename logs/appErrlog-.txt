@@ -2,3 +2,27 @@
 2021-03-05 11:52:42.918 +05:45 [INF] Hosting environment: Development
 2021-03-05 11:52:42.922 +05:45 [INF] Content root path: D:\NetCoreWebApi_v5
 2021-03-05 11:55:58.934 +05:45 [INF] Attempt to login abc@abc.com 
+2021-03-05 13:38:34.265 +05:45 [INF] Application started. Press Ctrl+C to shut down.
+2021-03-05 13:38:34.270 +05:45 [INF] Hosting environment: Development
+2021-03-05 13:38:34.273 +05:45 [INF] Content root path: D:\NetCoreWebApi_v5
+2021-03-05 13:38:49.404 +05:45 [INF] Attempt to login abc@abc.com 
+2021-03-05 13:39:07.637 +05:45 [INF] Attempt to login abc@abc.com 
+2021-03-05 13:39:09.652 +05:45 [INF] Attempt to login abc@abc.com 
+2021-03-05 13:39:10.448 +05:45 [INF] Attempt to login abc@abc.com 
+2021-03-05 13:39:11.078 +05:45 [INF] Attempt to login abc@abc.com 
+2021-03-05 13:39:11.832 +05:45 [INF] Attempt to login abc@abc.com 
+2021-03-05 13:40:29.216 +05:45 [INF] Application started. Press Ctrl+C to shut down.
+2021-03-05 13:40:29.222 +05:45 [INF] Hosting environment: Development
+2021-03-05 13:40:29.225 +05:45 [INF] Content root path: D:\NetCoreWebApi_v5
+2021-03-05 13:40:36.322 +05:45 [INF] Attempt to login abc@abc.com 
+2021-03-05 13:42:07.509 +05:45 [INF] Application started. Press Ctrl+C to shut down.
+2021-03-05 13:42:07.516 +05:45 [INF] Hosting environment: Development
+2021-03-05 13:42:07.520 +05:45 [INF] Content root path: D:\NetCoreWebApi_v5
+2021-03-05 13:42:24.946 +05:45 [INF] Attempt to login abc@abc.com 
+2021-03-05 13:42:25.471 +05:45 [ERR] Something went wrong in the  Register
+System.NotImplementedException: The method or operation is not implemented.
+   at NetCoreWebApi_v5.Controllers.AccountController.Login(LoginUserDTO userDTO) in D:\NetCoreWebApi_v5\Controllers\AccountController.cs:line 75
+2021-03-05 13:42:39.104 +05:45 [INF] Attempt to login abc@abc.com 
+2021-03-05 13:43:02.735 +05:45 [ERR] Something went wrong in the  Register
+System.NotImplementedException: The method or operation is not implemented.
+   at NetCoreWebApi_v5.Controllers.AccountController.Login(LoginUserDTO userDTO) in D:\NetCoreWebApi_v5\Controllers\AccountController.cs:line 75

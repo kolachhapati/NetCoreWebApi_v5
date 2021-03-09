@@ -40,9 +40,11 @@ namespace NetCoreWebApi_v5
                     options.UseSqlServer(Configuration.GetConnectionString("sqlConnection"))
                  );
 
-            services.AddAuthentication();
+            //services.AddAuthentication();
 
             services.ConfigureIdentity();
+            services.ConfigureJWT(Configuration);
+            services.ConfigureDependencies();
 
             services.AddCors(opt =>
             {
@@ -53,8 +55,7 @@ namespace NetCoreWebApi_v5
             });
 
             services.AddAutoMapper(typeof(MapperInitializer));
-
-            services.AddTransient<IUnitofWork, UnitofWork>();
+           
 
             services.AddSwaggerGen(c =>
             {
