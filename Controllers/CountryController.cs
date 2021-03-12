@@ -107,5 +107,29 @@ namespace NetCoreWebApi_v5.Controllers
                 return StatusCode(500, "Internal Server Error");
             }
         }
+
+        [Authorize]
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> DeleteCountry(int id)
+        {
+            if (id < 1)
+            {
+                _logger.LogError($"Invalid DELETE attempt in {nameof(DeleteCountry)}");
+                return BadRequest();
+            }
+
+            var hotel = await _unitofWork.Countries.Get(q => q.Id == id);
+            if (hotel == null)
+            {
+                _logger.LogError($"Invalid DELETE attempt in {nameof(DeleteCountry)}");
+                return BadRequest("Submitted data is invalid");
+            }
+
+            await _unitofWork.Countries.Delete(id);
+            await _unitofWork.Save();
+
+            return NoContent();
+
+        }
     }
 }
