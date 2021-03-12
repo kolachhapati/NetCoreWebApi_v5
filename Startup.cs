@@ -86,6 +86,8 @@ namespace NetCoreWebApi_v5
 
             app.UseCors("CorsPolicy");
 
+            app.UseAuthentication();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
