@@ -13,6 +13,8 @@ using NetCoreWebApi_v5.Services;
 using Serilog;
 using System.Text;
 using NetCoreWebApi_v5.Models;
+using AspNetCoreRateLimit;
+using System.Collections.Generic;
 
 namespace NetCoreWebApi_v5.Extensions
 {
@@ -66,8 +68,10 @@ namespace NetCoreWebApi_v5.Extensions
         #region GlobalErrorHandler
         public static void ConfigureExceptionHandler(this IApplicationBuilder app)
         {
-            app.UseExceptionHandler(error => {
-                error.Run(async context => {
+            app.UseExceptionHandler(error =>
+            {
+                error.Run(async context =>
+                {
                     context.Response.StatusCode = StatusCodes.Status500InternalServerError;
                     context.Response.ContentType = "application/json";
                     var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
@@ -86,5 +90,27 @@ namespace NetCoreWebApi_v5.Extensions
         }
         #endregion
 
+        #region ApiRequestLimit
+        //Rate Limiting anf Throttling
+        public static void ConfigureRateLimiting(this IServiceCollection services)
+        {
+            var rateLimitRules = new List<RateLimitRule>
+            {
+                new RateLimitRule
+                {
+                    Endpoint = "*",
+                    Limit= 1,
+                    Period = "5s"
+                }
+            };
+            services.Configure<IpRateLimitOptions>(opt =>
+            {
+                opt.GeneralRules = rateLimitRules;
+            });
+            services.AddSingleton<IRateLimitCounterStore, MemoryCacheRateLimitCounterStore>();
+            services.AddSingleton<IIpPolicyStore, MemoryCacheIpPolicyStore>();
+            services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+        }
+        #endregion
     }
 }

@@ -41,8 +41,9 @@ namespace NetCoreWebApi_v5
                     options.UseSqlServer(Configuration.GetConnectionString("sqlConnection"))
                  );
 
-            //services.AddAuthentication();
-
+            services.AddMemoryCache();
+            services.ConfigureRateLimiting();
+            services.AddHttpContextAccessor();
             services.ConfigureIdentity();
             services.ConfigureJWT(Configuration);
             services.ConfigureDependencies();
@@ -87,8 +88,6 @@ namespace NetCoreWebApi_v5
             app.UseRouting();
 
             app.UseCors("CorsPolicy");
-
-           
 
             app.UseAuthentication();
 
