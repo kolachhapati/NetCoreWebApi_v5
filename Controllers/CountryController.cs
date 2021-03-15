@@ -108,7 +108,6 @@ namespace NetCoreWebApi_v5.Controllers
             }
         }
 
-        [Authorize]
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteCountry(int id)
         {

@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -7,7 +10,9 @@ using NetCoreWebApi_v5.Data;
 using NetCoreWebApi_v5.IRepository;
 using NetCoreWebApi_v5.Repository;
 using NetCoreWebApi_v5.Services;
+using Serilog;
 using System.Text;
+using NetCoreWebApi_v5.Models;
 
 namespace NetCoreWebApi_v5.Extensions
 {
@@ -57,5 +62,29 @@ namespace NetCoreWebApi_v5.Extensions
         }
 
         #endregion
+
+        #region GlobalErrorHandler
+        public static void ConfigureExceptionHandler(this IApplicationBuilder app)
+        {
+            app.UseExceptionHandler(error => {
+                error.Run(async context => {
+                    context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+                    context.Response.ContentType = "application/json";
+                    var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
+                    if (contextFeature != null)
+                    {
+                        Log.Error($"Something Went Wrong in the {contextFeature.Error}");
+
+                        await context.Response.WriteAsync(new Error
+                        {
+                            StatusCode = context.Response.StatusCode,
+                            Message = "Internal Server Error. Please Try Again Later."
+                        }.ToString());
+                    }
+                });
+            });
+        }
+        #endregion
+
     }
 }
