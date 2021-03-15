@@ -46,6 +46,7 @@ namespace NetCoreWebApi_v5
             services.ConfigureIdentity();
             services.ConfigureJWT(Configuration);
             services.ConfigureDependencies();
+            
 
             services.AddCors(opt =>
             {
@@ -77,6 +78,7 @@ namespace NetCoreWebApi_v5
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "NetCoreWebApi_v5 v1"));
             }
+            app.ConfigureExceptionHandler();
 
             loggerFactory.AddSerilog();
 
@@ -85,6 +87,8 @@ namespace NetCoreWebApi_v5
             app.UseRouting();
 
             app.UseCors("CorsPolicy");
+
+           
 
             app.UseAuthentication();
 
