@@ -29,7 +29,7 @@ namespace NetCoreWebApi_v5.Extensions
         }
         #endregion
 
-        #region JWT
+        #region Json Web Token
         public static void ConfigureJWT(this IServiceCollection services, IConfiguration Configuration)
         {
             var jwtSettings = Configuration.GetSection("Jwt");
@@ -55,7 +55,7 @@ namespace NetCoreWebApi_v5.Extensions
         }
         #endregion
 
-        #region DependecyInjection
+        #region Dependecy Injection
 
         public static void ConfigureDependencies(this IServiceCollection services)
         {
@@ -65,7 +65,7 @@ namespace NetCoreWebApi_v5.Extensions
 
         #endregion
 
-        #region GlobalErrorHandler
+        #region Global Error Handler
         public static void ConfigureExceptionHandler(this IApplicationBuilder app)
         {
             app.UseExceptionHandler(error =>
@@ -90,7 +90,7 @@ namespace NetCoreWebApi_v5.Extensions
         }
         #endregion
 
-        #region ApiRequestLimit
+        #region Api Request Limit
         //Rate Limiting anf Throttling
         public static void ConfigureRateLimiting(this IServiceCollection services)
         {

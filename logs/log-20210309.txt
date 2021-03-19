@@ -1,2 +1,0 @@
-2021-03-09 16:42:44.393 +05:45 [INF] Application Is Starting
-2021-03-09 16:51:35.454 +05:45 [INF] Application Is Starting

@@ -42,12 +42,16 @@ namespace NetCoreWebApi_v5
                  );
 
             services.AddMemoryCache();
+
+            /* Extension Methods */
+
             services.ConfigureRateLimiting();
             services.AddHttpContextAccessor();
             services.ConfigureIdentity();
             services.ConfigureJWT(Configuration);
             services.ConfigureDependencies();
-            
+
+            /* end of Extension Methods */
 
             services.AddCors(opt =>
             {
