@@ -23,7 +23,12 @@ namespace NetCoreWebApi_v5.Extensions
         #region Identity
         public static void ConfigureIdentity(this IServiceCollection services)
         {
-            var builder = services.AddIdentityCore<ApiUser>(i => i.User.RequireUniqueEmail = true);
+            var builder = services.AddIdentityCore<ApiUser>(i =>
+            {
+                i.User.RequireUniqueEmail = true;
+                i.Password.RequiredLength = 6;
+                i.Password.RequireDigit = true;
+            });
             builder = new IdentityBuilder(builder.UserType, typeof(IdentityRole), services);
             builder.AddEntityFrameworkStores<DatabaseContext>().AddDefaultTokenProviders();
         }
